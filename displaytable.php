@@ -1,8 +1,8 @@
 <?php
-class DisplayResult{
+class Displaytable{
 
 
-  public static function displayTable($records){
+  public static function display($records){
   $html = "<html><body><table border = 1>";
   $html .= "<tr>";
   //Set the header using the 1st record
