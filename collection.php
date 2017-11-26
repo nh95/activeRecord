@@ -24,6 +24,31 @@ class collection {
     return $recordsSet;
     }
 
+    static public function deleteOne($id) {
+	  $db = dbConnection::getConnection();
+	  $tableName = get_called_class();
+	  $sql = 'DELETE FROM ' . $tableName  . ' where id = :id';
+	  try {
+	     $statement = $db->prepare($sql);
+	     $statement->bindParam(':id',$id);
+	     $statement->execute();
+	     echo 'Deleted Record Sucessfully';
+	     }catch (PDOException $e){
+	     echo 'Error while deleting the record';
+	  }
+	}
+    
+    static public function findOne($id) {
+	  $db = dbConnection::getConnection();
+	  $tableName = get_called_class();
+	  $sql = 'SELECT * FROM ' . $tableName  . ' where id = :id';
+	  $statement = $db->prepare($sql);
+	  $statement->bindParam(':id',$id);
+	  $statement->execute();
+	  $class = static::$modelName;
+	  $statement->setFetchMode(PDO::FETCH_CLASS, $class);
+	  return  $statement->fetchAll();
+    }
 }
     
 
