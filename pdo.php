@@ -1,5 +1,4 @@
 <?php
-//turn on debugging messages
 ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
@@ -9,14 +8,10 @@ define('USERNAME', 'nh95');
 define('PASSWORD', '1994apache');
 define('CONNECTION', 'sql1.njit.edu');
 
-//turn on debugging messages
 ini_set('display_errors', 'true');
 error_reporting(E_ALL);
-//instantiate the program object
-//Class to load classes it finds the file when the progrm starts to fail for calling a missing class
 class Manage {
     public static function autoload($class) {
-                //you can put any file name or directory here
 	include strtolower($class) . '.php';
 	}			 	
 }
@@ -31,7 +26,6 @@ echo '<h1> Select from account id=1 </h1>';
 $records = accounts :: findOne(1);
 Displaytable::display($records);
 
-echo '<h1>Updating record in accounts<h1>';
 $account = new account();
 $account->id = 1;
 $account->email="update@njit.edu";
@@ -41,7 +35,7 @@ $account->phone="1234656565";
 $account->birthday="09-13-1995";
 $account->gender="male";
 $account->password="4564";
-$account->save();
+accounts :: save($account);
 echo 'Record Updated Successfully' ;
 
 $account = new account();
@@ -52,7 +46,8 @@ $account->phone="22424";
 $account->birthday="10-12-1994";
 $account->gender="male";
 $account->password="12345";
-$account->save();
+accounts :: save($account);
+
 //Record 2
 $account = new account();
 $account->email="divyesh@njit.edu";
@@ -62,7 +57,8 @@ $account->phone="45646546";
 $account->birthday="16-11-1993";
 $account->gender="male";
 $account->password="123423";
-$lastId = $account->save();
+$lstId = accounts :: save($account);
+
 
 $records = accounts :: findAll();
 echo '<h1> After adding new records </h1>';
