@@ -29,7 +29,7 @@ Displaytable::display($records);
 
 echo '<h1> Select from account id=1 </h1>';
 $records = accounts :: findOne(1);
-Displaytable::displayTable($records);
+Displaytable::display($records);
 
 
 //For todos
@@ -38,7 +38,49 @@ echo '<h1> All records from todos </h1>';
 Displaytable::display($records);
 
 echo '<h1> Select from todos id=1 </h1>';
-$records = accounts :: findOne(1);
+$records = todos :: findOne(1);
 Displaytable::display($records);
+
+//Updating
+$todo = new Todo();
+$todo-> id = 1;
+$todo->owneremail = 'murali@njit.edu' ;
+$todo->ownerid = 4 ;
+$todo->createddate = '2010-03-01 00:00:00' ;
+$todo->duedate = '2010-06-01 00:00:00' ;
+$todo->message = 'Murali B' ;
+$todo->isdone = 0;
+todos :: save($todo);
+
+
+//Adding
+$todo = new Todo();
+$todo->owneremail = 'murali@njit.edu' ;
+$todo->ownerid = 4 ;
+$todo->createddate = '2010-03-01 00:00:00' ;
+$todo->duedate = '2010-06-01 00:00:00' ;
+$todo->message = 'Murali B' ;
+$todo->isdone = 0;
+todos :: save($todo);
+
+$todo = new Todo();
+$todo->owneremail = 'abid@njit.edu' ;
+$todo->ownerid = 5 ;
+$todo->createddate = '2011-05-01 00:00:00' ;
+$todo->duedate = '2011-06-01 00:00:00' ;
+$todo->message = 'Abid M' ;
+$todo->isdone = 0;
+$lstId = todos :: save($todo);
+
+$records = todos :: findAll();
+echo '<h1> After adding new records </h1>';
+Displaytable::display($records);
+
+
+todos :: deleteOne($lstId);
+$records = todos :: findAll();
+echo '<h1> After deleting a record </h1>';
+Displaytable::display($records);
+
 
 ?>
