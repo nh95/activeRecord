@@ -31,6 +31,48 @@ echo '<h1> Select from account id=1 </h1>';
 $records = accounts :: findOne(1);
 Displaytable::display($records);
 
+echo '<h1>Updating record in accounts<h1>';
+$account = new account();
+$account->id = 1;
+$account->email="update@njit.edu";
+$account->fname="Naveen";
+$account->lname="Hottigimath";
+$account->phone="1234656565";
+$account->birthday="09-13-1995";
+$account->gender="male";
+$account->password="4564";
+$account->save();
+echo 'Record Updated Successfully' ;
+
+$account = new account();
+$account->email="nitin@njit.edu";
+$account->fname="Nitin";
+$account->lname="Shah";
+$account->phone="22424";
+$account->birthday="10-12-1994";
+$account->gender="male";
+$account->password="12345";
+$account->save();
+//Record 2
+$account = new account();
+$account->email="divyesh@njit.edu";
+$account->fname="Divyesh";
+$account->lname="Shah";
+$account->phone="45646546";
+$account->birthday="16-11-1993";
+$account->gender="male";
+$account->password="123423";
+$lastId = $account->save();
+
+$records = accounts :: findAll();
+echo '<h1> After adding new records </h1>';
+Displaytable::display($records);
+
+
+accounts :: deleteOne($lstId);
+$records = todos :: findAll();
+echo '<h1> After deleting a record </h1>';
+Displaytable::display($records);
 
 //For todos
 $records = todos :: findAll();
